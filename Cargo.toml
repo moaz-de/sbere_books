@@ -1,0 +1,38 @@
+[package]
+name = "sbere-books-bot"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "sbere-books-bot"
+path = "src/main.rs"
+
+[dependencies]
+# البوت
+teloxide = { version = "0.13", features = ["macros", "webhooks-axum"] }
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# SQLite — bundled: لا يحتاج sqlite مثبتاً في النظام
+rusqlite = { version = "0.31", features = ["bundled"] }
+
+# متغيرات البيئة
+dotenv = "0.15"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# UUIDs
+uuid = { version = "1", features = ["v4"] }
+
+# معالجة الأخطاء
+anyhow = "1"
+
+# HTTP (مطلوب لـ Webhook)
+reqwest = { version = "0.12", features = ["json"] }

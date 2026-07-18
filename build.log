@@ -1,0 +1,756 @@
+   Compiling sbere-books-bot v0.1.0 (/home/moath70188/rust-bot)
+warning: use of deprecated unit variant `teloxide::types::ParseMode::Markdown`: This is a legacy mode, retained for backward compatibility. Use `MarkdownV2` instead.
+   --> src/bot/handlers.rs:444:45
+    |
+444 |     .parse_mode(teloxide::types::ParseMode::Markdown)
+    |                                             ^^^^^^^^
+    |
+    = note: `#[warn(deprecated)]` on by default
+
+error[E0433]: cannot find type `InlineKeyboardMarkup` in this scope
+   --> src/bot/handlers.rs:207:23
+    |
+207 |         .reply_markup(InlineKeyboardMarkup::new(vec![vec![
+    |                       ^^^^^^^^^^^^^^^^^^^^ use of undeclared type `InlineKeyboardMarkup`
+
+warning: use of deprecated method `teloxide::types::message::getters::<impl teloxide::prelude::Message>::from`: use `.from` field instead
+   --> src/bot/handlers.rs:369:27
+    |
+369 |     let user_raw_id = msg.from().map(|u| u.id.0 as i64).unwrap_or(0);
+    |                           ^^^^
+
+warning: use of deprecated method `teloxide::types::message::getters::<impl teloxide::prelude::Message>::from`: use `.from` field instead
+   --> src/bot/handlers.rs:374:23
+    |
+374 |         username: msg.from().and_then(|u| u.username.clone()),
+    |                       ^^^^
+
+warning: use of deprecated method `teloxide::types::message::getters::<impl teloxide::prelude::Message>::from`: use `.from` field instead
+   --> src/bot/handlers.rs:384:25
+    |
+384 |     let user_info = msg.from().map(|u| {
+    |                         ^^^^
+
+error[E0308]: mismatched types
+   --> src/bot/handlers.rs:460:18
+    |
+460 |             Some(doc.file.size),
+    |             ---- ^^^^^^^^^^^^^ expected `u64`, found `u32`
+    |             |
+    |             arguments to this enum variant are incorrect
+    |
+help: the type constructed contains `u32` due to the type of the argument passed
+   --> src/bot/handlers.rs:460:13
+    |
+460 |             Some(doc.file.size),
+    |             ^^^^^-------------^
+    |                  |
+    |                  this argument influences the type of `Some`
+note: tuple variant defined here
+   --> /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/option.rs:605:4
+help: you can convert a `u32` to a `u64`
+    |
+460 |             Some(doc.file.size.into()),
+    |                               +++++++
+
+error[E0308]: mismatched types
+   --> src/bot/handlers.rs:467:18
+    |
+467 |             Some(vid.file.size),
+    |             ---- ^^^^^^^^^^^^^ expected `u64`, found `u32`
+    |             |
+    |             arguments to this enum variant are incorrect
+    |
+help: the type constructed contains `u32` due to the type of the argument passed
+   --> src/bot/handlers.rs:467:13
+    |
+467 |             Some(vid.file.size),
+    |             ^^^^^-------------^
+    |                  |
+    |                  this argument influences the type of `Some`
+note: tuple variant defined here
+   --> /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/option.rs:605:4
+help: you can convert a `u32` to a `u64`
+    |
+467 |             Some(vid.file.size.into()),
+    |                               +++++++
+
+error[E0277]: the trait bound `fn(..., ..., ..., ...) -> ... {handle_main_menu}: Injectable<..., ..., ...>` is not satisfied
+  --> src/bot/mod.rs:65:41
+   |
+65 |         .branch(cb("main_menu",         handle_main_menu))
+   |                 --                      ^^^^^^^^^^^^^^^^ unsatisfied trait bound
+   |                 |
+   |                 required by a bound introduced by this call
+   |
+   = help: the trait `Injectable<DependencyMap, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>` is not implemented for fn item `fn(..., ..., ..., ...) -> ... {handle_main_menu}`
+   = help: `Asyncify<Func>` implements trait `Injectable<Input, Output, FnArgs>`:
+             Injectable<Input, Output, ()>
+             Injectable<Input, Output, (A, B)>
+             Injectable<Input, Output, (A, B, C)>
+             Injectable<Input, Output, (A, B, C, D)>
+             Injectable<Input, Output, (A, B, C, D, E)>
+             Injectable<Input, Output, (A, B, C, D, E, F)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G, H)>
+           and 2 others
+note: required by a bound in `cb`
+  --> src/bot/mod.rs:97:8
+   |
+92 |   fn cb<H, Args>(trigger: &'static str, handler: H)
+   |      -- required by a bound in this function
+...
+97 |       H: dptree::di::Injectable<dptree::di::DependencyMap,
+   |  ________^
+98 | |                                Result<(), Box<dyn std::error::Error + ...
+99 | |                                dptree::di::DependencyMap>
+   | |_________________________________________________________^ required by this bound in `cb`
+   = note: the full name for the type has been written to '/home/moath70188/rust-bot/target/debug/deps/sbere_books_bot-9be03bda3129a523.long-type-8934046357282200803.txt'
+   = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> src/bot/mod.rs:65:17
+    |
+ 65 |         .branch(cb("main_menu",         handle_main_menu))
+    |          ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Handler<'_, DependencyMap, _, ...>`, found `Handler<'_, DependencyMap, ..., ...>`
+    |          |
+    |          arguments to this method are incorrect
+    |
+    = note: expected struct `Handler<'_, _, _, DpHandlerDescription>`
+               found struct `Handler<'static, _, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>`
+note: method defined here
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/core.rs:156:12
+    |
+156 |     pub fn branch(self, next: Self) -> Self
+    |            ^^^^^^
+
+error[E0277]: the trait bound `fn(..., ..., ..., ...) -> ... {handle_browse_root}: Injectable<..., ..., ...>` is not satisfied
+  --> src/bot/mod.rs:66:41
+   |
+66 |         .branch(cb("browse_root",       handle_browse_root))
+   |                 --                      ^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
+   |                 |
+   |                 required by a bound introduced by this call
+   |
+   = help: the trait `Injectable<DependencyMap, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>` is not implemented for fn item `fn(..., ..., ..., ...) -> ... {handle_browse_root}`
+   = help: `Asyncify<Func>` implements trait `Injectable<Input, Output, FnArgs>`:
+             Injectable<Input, Output, ()>
+             Injectable<Input, Output, (A, B)>
+             Injectable<Input, Output, (A, B, C)>
+             Injectable<Input, Output, (A, B, C, D)>
+             Injectable<Input, Output, (A, B, C, D, E)>
+             Injectable<Input, Output, (A, B, C, D, E, F)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G, H)>
+           and 2 others
+note: required by a bound in `cb`
+  --> src/bot/mod.rs:97:8
+   |
+92 |   fn cb<H, Args>(trigger: &'static str, handler: H)
+   |      -- required by a bound in this function
+...
+97 |       H: dptree::di::Injectable<dptree::di::DependencyMap,
+   |  ________^
+98 | |                                Result<(), Box<dyn std::error::Error + ...
+99 | |                                dptree::di::DependencyMap>
+   | |_________________________________________________________^ required by this bound in `cb`
+   = note: the full name for the type has been written to '/home/moath70188/rust-bot/target/debug/deps/sbere_books_bot-9be03bda3129a523.long-type-3007373779185497711.txt'
+   = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> src/bot/mod.rs:66:17
+    |
+ 66 |         .branch(cb("browse_root",       handle_browse_root))
+    |          ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Handler<'_, DependencyMap, _, ...>`, found `Handler<'_, DependencyMap, ..., ...>`
+    |          |
+    |          arguments to this method are incorrect
+    |
+    = note: expected struct `Handler<'_, _, _, DpHandlerDescription>`
+               found struct `Handler<'static, _, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>`
+note: method defined here
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/core.rs:156:12
+    |
+156 |     pub fn branch(self, next: Self) -> Self
+    |            ^^^^^^
+
+error[E0277]: the trait bound `fn(..., ..., ...) -> ... {handle_search_start}: Injectable<..., ..., ...>` is not satisfied
+  --> src/bot/mod.rs:67:41
+   |
+67 |         .branch(cb("search_books",      handle_search_start))
+   |                 --                      ^^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
+   |                 |
+   |                 required by a bound introduced by this call
+   |
+   = help: the trait `Injectable<DependencyMap, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>` is not implemented for fn item `fn(..., ..., ...) -> ... {handle_search_start}`
+   = help: `Asyncify<Func>` implements trait `Injectable<Input, Output, FnArgs>`:
+             Injectable<Input, Output, ()>
+             Injectable<Input, Output, (A, B)>
+             Injectable<Input, Output, (A, B, C)>
+             Injectable<Input, Output, (A, B, C, D)>
+             Injectable<Input, Output, (A, B, C, D, E)>
+             Injectable<Input, Output, (A, B, C, D, E, F)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G, H)>
+           and 2 others
+note: required by a bound in `cb`
+  --> src/bot/mod.rs:97:8
+   |
+92 |   fn cb<H, Args>(trigger: &'static str, handler: H)
+   |      -- required by a bound in this function
+...
+97 |       H: dptree::di::Injectable<dptree::di::DependencyMap,
+   |  ________^
+98 | |                                Result<(), Box<dyn std::error::Error + ...
+99 | |                                dptree::di::DependencyMap>
+   | |_________________________________________________________^ required by this bound in `cb`
+   = note: the full name for the type has been written to '/home/moath70188/rust-bot/target/debug/deps/sbere_books_bot-9be03bda3129a523.long-type-12802678446899096629.txt'
+   = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> src/bot/mod.rs:67:17
+    |
+ 67 |         .branch(cb("search_books",      handle_search_start))
+    |          ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Handler<'_, DependencyMap, _, ...>`, found `Handler<'_, DependencyMap, ..., ...>`
+    |          |
+    |          arguments to this method are incorrect
+    |
+    = note: expected struct `Handler<'_, _, _, DpHandlerDescription>`
+               found struct `Handler<'static, _, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>`
+note: method defined here
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/core.rs:156:12
+    |
+156 |     pub fn branch(self, next: Self) -> Self
+    |            ^^^^^^
+
+error[E0277]: the trait bound `fn(..., ..., ..., ...) -> ... {handle_cancel_search}: Injectable<..., ..., ...>` is not satisfied
+  --> src/bot/mod.rs:68:41
+   |
+68 |         .branch(cb("cancel_search",     handle_cancel_search))
+   |                 --                      ^^^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
+   |                 |
+   |                 required by a bound introduced by this call
+   |
+   = help: the trait `Injectable<DependencyMap, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>` is not implemented for fn item `fn(..., ..., ..., ...) -> ... {handle_cancel_search}`
+   = help: `Asyncify<Func>` implements trait `Injectable<Input, Output, FnArgs>`:
+             Injectable<Input, Output, ()>
+             Injectable<Input, Output, (A, B)>
+             Injectable<Input, Output, (A, B, C)>
+             Injectable<Input, Output, (A, B, C, D)>
+             Injectable<Input, Output, (A, B, C, D, E)>
+             Injectable<Input, Output, (A, B, C, D, E, F)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G, H)>
+           and 2 others
+note: required by a bound in `cb`
+  --> src/bot/mod.rs:97:8
+   |
+92 |   fn cb<H, Args>(trigger: &'static str, handler: H)
+   |      -- required by a bound in this function
+...
+97 |       H: dptree::di::Injectable<dptree::di::DependencyMap,
+   |  ________^
+98 | |                                Result<(), Box<dyn std::error::Error + ...
+99 | |                                dptree::di::DependencyMap>
+   | |_________________________________________________________^ required by this bound in `cb`
+   = note: the full name for the type has been written to '/home/moath70188/rust-bot/target/debug/deps/sbere_books_bot-9be03bda3129a523.long-type-17594581288881795894.txt'
+   = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> src/bot/mod.rs:68:17
+    |
+ 68 |         .branch(cb("cancel_search",     handle_cancel_search))
+    |          ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Handler<'_, DependencyMap, _, ...>`, found `Handler<'_, DependencyMap, ..., ...>`
+    |          |
+    |          arguments to this method are incorrect
+    |
+    = note: expected struct `Handler<'_, _, _, DpHandlerDescription>`
+               found struct `Handler<'static, _, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>`
+note: method defined here
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/core.rs:156:12
+    |
+156 |     pub fn branch(self, next: Self) -> Self
+    |            ^^^^^^
+
+error[E0277]: the trait bound `fn(..., ..., ...) -> ... {handle_contribute_start}: Injectable<..., ..., ...>` is not satisfied
+  --> src/bot/mod.rs:69:41
+   |
+69 |         .branch(cb("contribute",        handle_contribute_start))
+   |                 --                      ^^^^^^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
+   |                 |
+   |                 required by a bound introduced by this call
+   |
+   = help: the trait `Injectable<DependencyMap, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>` is not implemented for fn item `fn(..., ..., ...) -> ... {handle_contribute_start}`
+   = help: `Asyncify<Func>` implements trait `Injectable<Input, Output, FnArgs>`:
+             Injectable<Input, Output, ()>
+             Injectable<Input, Output, (A, B)>
+             Injectable<Input, Output, (A, B, C)>
+             Injectable<Input, Output, (A, B, C, D)>
+             Injectable<Input, Output, (A, B, C, D, E)>
+             Injectable<Input, Output, (A, B, C, D, E, F)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G, H)>
+           and 2 others
+note: required by a bound in `cb`
+  --> src/bot/mod.rs:97:8
+   |
+92 |   fn cb<H, Args>(trigger: &'static str, handler: H)
+   |      -- required by a bound in this function
+...
+97 |       H: dptree::di::Injectable<dptree::di::DependencyMap,
+   |  ________^
+98 | |                                Result<(), Box<dyn std::error::Error + ...
+99 | |                                dptree::di::DependencyMap>
+   | |_________________________________________________________^ required by this bound in `cb`
+   = note: the full name for the type has been written to '/home/moath70188/rust-bot/target/debug/deps/sbere_books_bot-9be03bda3129a523.long-type-7338297594037816496.txt'
+   = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> src/bot/mod.rs:69:17
+    |
+ 69 |         .branch(cb("contribute",        handle_contribute_start))
+    |          ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Handler<'_, DependencyMap, _, ...>`, found `Handler<'_, DependencyMap, ..., ...>`
+    |          |
+    |          arguments to this method are incorrect
+    |
+    = note: expected struct `Handler<'_, _, _, DpHandlerDescription>`
+               found struct `Handler<'static, _, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>`
+note: method defined here
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/core.rs:156:12
+    |
+156 |     pub fn branch(self, next: Self) -> Self
+    |            ^^^^^^
+
+error[E0277]: the trait bound `fn(..., ..., ...) -> ... {handle_finish_contribution}: Injectable<..., ..., ...>` is not satisfied
+  --> src/bot/mod.rs:70:43
+   |
+70 |         .branch(cb("finish_contribution", handle_finish_contribution))
+   |                 --                        ^^^^^^^^^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
+   |                 |
+   |                 required by a bound introduced by this call
+   |
+   = help: the trait `Injectable<DependencyMap, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>` is not implemented for fn item `fn(..., ..., ...) -> ... {handle_finish_contribution}`
+   = help: `Asyncify<Func>` implements trait `Injectable<Input, Output, FnArgs>`:
+             Injectable<Input, Output, ()>
+             Injectable<Input, Output, (A, B)>
+             Injectable<Input, Output, (A, B, C)>
+             Injectable<Input, Output, (A, B, C, D)>
+             Injectable<Input, Output, (A, B, C, D, E)>
+             Injectable<Input, Output, (A, B, C, D, E, F)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G, H)>
+           and 2 others
+note: required by a bound in `cb`
+  --> src/bot/mod.rs:97:8
+   |
+92 |   fn cb<H, Args>(trigger: &'static str, handler: H)
+   |      -- required by a bound in this function
+...
+97 |       H: dptree::di::Injectable<dptree::di::DependencyMap,
+   |  ________^
+98 | |                                Result<(), Box<dyn std::error::Error + ...
+99 | |                                dptree::di::DependencyMap>
+   | |_________________________________________________________^ required by this bound in `cb`
+   = note: the full name for the type has been written to '/home/moath70188/rust-bot/target/debug/deps/sbere_books_bot-9be03bda3129a523.long-type-12950960445017998660.txt'
+   = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> src/bot/mod.rs:70:17
+    |
+ 70 |         .branch(cb("finish_contribution", handle_finish_contribution))
+    |          ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Handler<'_, DependencyMap, _, ...>`, found `Handler<'_, DependencyMap, ..., ...>`
+    |          |
+    |          arguments to this method are incorrect
+    |
+    = note: expected struct `Handler<'_, _, _, DpHandlerDescription>`
+               found struct `Handler<'static, _, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>`
+note: method defined here
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/core.rs:156:12
+    |
+156 |     pub fn branch(self, next: Self) -> Self
+    |            ^^^^^^
+
+error[E0277]: the trait bound `fn(..., ..., ...) -> ... {handle_about}: Injectable<..., ..., ...>` is not satisfied
+  --> src/bot/mod.rs:71:41
+   |
+71 |         .branch(cb("about",             handle_about))
+   |                 --                      ^^^^^^^^^^^^ unsatisfied trait bound
+   |                 |
+   |                 required by a bound introduced by this call
+   |
+   = help: the trait `Injectable<DependencyMap, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>` is not implemented for fn item `fn(Bot, ..., ...) -> ... {handle_about}`
+   = help: `Asyncify<Func>` implements trait `Injectable<Input, Output, FnArgs>`:
+             Injectable<Input, Output, ()>
+             Injectable<Input, Output, (A, B)>
+             Injectable<Input, Output, (A, B, C)>
+             Injectable<Input, Output, (A, B, C, D)>
+             Injectable<Input, Output, (A, B, C, D, E)>
+             Injectable<Input, Output, (A, B, C, D, E, F)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G)>
+             Injectable<Input, Output, (A, B, C, D, E, F, G, H)>
+           and 2 others
+note: required by a bound in `cb`
+  --> src/bot/mod.rs:97:8
+   |
+92 |   fn cb<H, Args>(trigger: &'static str, handler: H)
+   |      -- required by a bound in this function
+...
+97 |       H: dptree::di::Injectable<dptree::di::DependencyMap,
+   |  ________^
+98 | |                                Result<(), Box<dyn std::error::Error + ...
+99 | |                                dptree::di::DependencyMap>
+   | |_________________________________________________________^ required by this bound in `cb`
+   = note: the full name for the type has been written to '/home/moath70188/rust-bot/target/debug/deps/sbere_books_bot-9be03bda3129a523.long-type-17605310615343184729.txt'
+   = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> src/bot/mod.rs:71:17
+    |
+ 71 |         .branch(cb("about",             handle_about))
+    |          ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Handler<'_, DependencyMap, _, ...>`, found `Handler<'_, DependencyMap, ..., ...>`
+    |          |
+    |          arguments to this method are incorrect
+    |
+    = note: expected struct `Handler<'_, _, _, DpHandlerDescription>`
+               found struct `Handler<'static, _, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>`
+note: method defined here
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/core.rs:156:12
+    |
+156 |     pub fn branch(self, next: Self) -> Self
+    |            ^^^^^^
+
+error[E0277]: the trait bound `fn(..., ..., ..., ...) -> ... {handle_open_folder}: Injectable<..., ..., ...>` is not satisfied
+   --> src/bot/mod.rs:72:43
+    |
+ 72 |         .branch(cb_prefix("open_folder:", handle_open_folder))
+    |                 ---------                 ^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
+    |                 |
+    |                 required by a bound introduced by this call
+    |
+    = help: the trait `Injectable<DependencyMap, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>` is not implemented for fn item `fn(..., ..., ..., ...) -> ... {handle_open_folder}`
+    = help: `Asyncify<Func>` implements trait `Injectable<Input, Output, FnArgs>`:
+              Injectable<Input, Output, ()>
+              Injectable<Input, Output, (A, B)>
+              Injectable<Input, Output, (A, B, C)>
+              Injectable<Input, Output, (A, B, C, D)>
+              Injectable<Input, Output, (A, B, C, D, E)>
+              Injectable<Input, Output, (A, B, C, D, E, F)>
+              Injectable<Input, Output, (A, B, C, D, E, F, G)>
+              Injectable<Input, Output, (A, B, C, D, E, F, G, H)>
+            and 2 others
+note: required by a bound in `cb_prefix`
+   --> src/bot/mod.rs:112:8
+    |
+107 |   fn cb_prefix<H, Args>(prefix: &'static str, handler: H)
+    |      --------- required by a bound in this function
+...
+112 |       H: dptree::di::Injectable<dptree::di::DependencyMap,
+    |  ________^
+113 | |                                Result<(), Box<dyn std::error::Error +...
+114 | |                                dptree::di::DependencyMap>
+    | |_________________________________________________________^ required by this bound in `cb_prefix`
+    = note: the full name for the type has been written to '/home/moath70188/rust-bot/target/debug/deps/sbere_books_bot-9be03bda3129a523.long-type-16241646967959860483.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> src/bot/mod.rs:72:17
+    |
+ 72 |         .branch(cb_prefix("open_folder:", handle_open_folder))
+    |          ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Handler<'_, DependencyMap, _, ...>`, found `Handler<'_, DependencyMap, ..., ...>`
+    |          |
+    |          arguments to this method are incorrect
+    |
+    = note: expected struct `Handler<'_, _, _, DpHandlerDescription>`
+               found struct `Handler<'static, _, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>`
+note: method defined here
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/core.rs:156:12
+    |
+156 |     pub fn branch(self, next: Self) -> Self
+    |            ^^^^^^
+
+error[E0277]: the trait bound `fn(..., ..., ...) -> ... {handle_open_file}: Injectable<..., ..., ...>` is not satisfied
+   --> src/bot/mod.rs:73:43
+    |
+ 73 |         .branch(cb_prefix("open_file:",   handle_open_file))
+    |                 ---------                 ^^^^^^^^^^^^^^^^ unsatisfied trait bound
+    |                 |
+    |                 required by a bound introduced by this call
+    |
+    = help: the trait `Injectable<DependencyMap, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>` is not implemented for fn item `fn(..., ..., ...) -> ... {handle_open_file}`
+    = help: `Asyncify<Func>` implements trait `Injectable<Input, Output, FnArgs>`:
+              Injectable<Input, Output, ()>
+              Injectable<Input, Output, (A, B)>
+              Injectable<Input, Output, (A, B, C)>
+              Injectable<Input, Output, (A, B, C, D)>
+              Injectable<Input, Output, (A, B, C, D, E)>
+              Injectable<Input, Output, (A, B, C, D, E, F)>
+              Injectable<Input, Output, (A, B, C, D, E, F, G)>
+              Injectable<Input, Output, (A, B, C, D, E, F, G, H)>
+            and 2 others
+note: required by a bound in `cb_prefix`
+   --> src/bot/mod.rs:112:8
+    |
+107 |   fn cb_prefix<H, Args>(prefix: &'static str, handler: H)
+    |      --------- required by a bound in this function
+...
+112 |       H: dptree::di::Injectable<dptree::di::DependencyMap,
+    |  ________^
+113 | |                                Result<(), Box<dyn std::error::Error +...
+114 | |                                dptree::di::DependencyMap>
+    | |_________________________________________________________^ required by this bound in `cb_prefix`
+    = note: the full name for the type has been written to '/home/moath70188/rust-bot/target/debug/deps/sbere_books_bot-9be03bda3129a523.long-type-3690765975121414941.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> src/bot/mod.rs:73:17
+    |
+ 73 |         .branch(cb_prefix("open_file:",   handle_open_file))
+    |          ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Handler<'_, DependencyMap, _, ...>`, found `Handler<'_, DependencyMap, ..., ...>`
+    |          |
+    |          arguments to this method are incorrect
+    |
+    = note: expected struct `Handler<'_, _, _, DpHandlerDescription>`
+               found struct `Handler<'static, _, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>`
+note: method defined here
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/core.rs:156:12
+    |
+156 |     pub fn branch(self, next: Self) -> Self
+    |            ^^^^^^
+
+error[E0277]: the trait bound `fn(..., ..., ..., ...) -> ... {handle_folder_page}: Injectable<..., ..., ...>` is not satisfied
+   --> src/bot/mod.rs:74:43
+    |
+ 74 |         .branch(cb_prefix("page:",        handle_folder_page))
+    |                 ---------                 ^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
+    |                 |
+    |                 required by a bound introduced by this call
+    |
+    = help: the trait `Injectable<DependencyMap, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>` is not implemented for fn item `fn(..., ..., ..., ...) -> ... {handle_folder_page}`
+    = help: `Asyncify<Func>` implements trait `Injectable<Input, Output, FnArgs>`:
+              Injectable<Input, Output, ()>
+              Injectable<Input, Output, (A, B)>
+              Injectable<Input, Output, (A, B, C)>
+              Injectable<Input, Output, (A, B, C, D)>
+              Injectable<Input, Output, (A, B, C, D, E)>
+              Injectable<Input, Output, (A, B, C, D, E, F)>
+              Injectable<Input, Output, (A, B, C, D, E, F, G)>
+              Injectable<Input, Output, (A, B, C, D, E, F, G, H)>
+            and 2 others
+note: required by a bound in `cb_prefix`
+   --> src/bot/mod.rs:112:8
+    |
+107 |   fn cb_prefix<H, Args>(prefix: &'static str, handler: H)
+    |      --------- required by a bound in this function
+...
+112 |       H: dptree::di::Injectable<dptree::di::DependencyMap,
+    |  ________^
+113 | |                                Result<(), Box<dyn std::error::Error +...
+114 | |                                dptree::di::DependencyMap>
+    | |_________________________________________________________^ required by this bound in `cb_prefix`
+    = note: the full name for the type has been written to '/home/moath70188/rust-bot/target/debug/deps/sbere_books_bot-9be03bda3129a523.long-type-11007472453780408245.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> src/bot/mod.rs:74:17
+    |
+ 74 |         .branch(cb_prefix("page:",        handle_folder_page))
+    |          ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Handler<'_, DependencyMap, _, ...>`, found `Handler<'_, DependencyMap, ..., ...>`
+    |          |
+    |          arguments to this method are incorrect
+    |
+    = note: expected struct `Handler<'_, _, _, DpHandlerDescription>`
+               found struct `Handler<'static, _, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>`
+note: method defined here
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/core.rs:156:12
+    |
+156 |     pub fn branch(self, next: Self) -> Self
+    |            ^^^^^^
+
+error[E0277]: the trait bound `fn(..., ..., ..., ...) -> ... {handle_folder_page}: Injectable<..., ..., ...>` is not satisfied
+   --> src/bot/mod.rs:75:43
+    |
+ 75 |         .branch(cb_prefix("page_root:",   handle_folder_page))
+    |                 ---------                 ^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
+    |                 |
+    |                 required by a bound introduced by this call
+    |
+    = help: the trait `Injectable<DependencyMap, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>` is not implemented for fn item `fn(..., ..., ..., ...) -> ... {handle_folder_page}`
+    = help: `Asyncify<Func>` implements trait `Injectable<Input, Output, FnArgs>`:
+              Injectable<Input, Output, ()>
+              Injectable<Input, Output, (A, B)>
+              Injectable<Input, Output, (A, B, C)>
+              Injectable<Input, Output, (A, B, C, D)>
+              Injectable<Input, Output, (A, B, C, D, E)>
+              Injectable<Input, Output, (A, B, C, D, E, F)>
+              Injectable<Input, Output, (A, B, C, D, E, F, G)>
+              Injectable<Input, Output, (A, B, C, D, E, F, G, H)>
+            and 2 others
+note: required by a bound in `cb_prefix`
+   --> src/bot/mod.rs:112:8
+    |
+107 |   fn cb_prefix<H, Args>(prefix: &'static str, handler: H)
+    |      --------- required by a bound in this function
+...
+112 |       H: dptree::di::Injectable<dptree::di::DependencyMap,
+    |  ________^
+113 | |                                Result<(), Box<dyn std::error::Error +...
+114 | |                                dptree::di::DependencyMap>
+    | |_________________________________________________________^ required by this bound in `cb_prefix`
+    = note: the full name for the type has been written to '/home/moath70188/rust-bot/target/debug/deps/sbere_books_bot-9be03bda3129a523.long-type-11007472453780408245.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> src/bot/mod.rs:75:17
+    |
+ 75 |         .branch(cb_prefix("page_root:",   handle_folder_page))
+    |          ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Handler<'_, DependencyMap, _, ...>`, found `Handler<'_, DependencyMap, ..., ...>`
+    |          |
+    |          arguments to this method are incorrect
+    |
+    = note: expected struct `Handler<'_, _, _, DpHandlerDescription>`
+               found struct `Handler<'static, _, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>`
+note: method defined here
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/core.rs:156:12
+    |
+156 |     pub fn branch(self, next: Self) -> Self
+    |            ^^^^^^
+
+error[E0277]: the trait bound `fn(..., ..., ..., ...) -> ... {handle_search_page}: Injectable<..., ..., ...>` is not satisfied
+   --> src/bot/mod.rs:76:43
+    |
+ 76 |         .branch(cb_prefix("search_page:", handle_search_page))
+    |                 ---------                 ^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
+    |                 |
+    |                 required by a bound introduced by this call
+    |
+    = help: the trait `Injectable<DependencyMap, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>` is not implemented for fn item `fn(..., ..., ..., ...) -> ... {handle_search_page}`
+    = help: `Asyncify<Func>` implements trait `Injectable<Input, Output, FnArgs>`:
+              Injectable<Input, Output, ()>
+              Injectable<Input, Output, (A, B)>
+              Injectable<Input, Output, (A, B, C)>
+              Injectable<Input, Output, (A, B, C, D)>
+              Injectable<Input, Output, (A, B, C, D, E)>
+              Injectable<Input, Output, (A, B, C, D, E, F)>
+              Injectable<Input, Output, (A, B, C, D, E, F, G)>
+              Injectable<Input, Output, (A, B, C, D, E, F, G, H)>
+            and 2 others
+note: required by a bound in `cb_prefix`
+   --> src/bot/mod.rs:112:8
+    |
+107 |   fn cb_prefix<H, Args>(prefix: &'static str, handler: H)
+    |      --------- required by a bound in this function
+...
+112 |       H: dptree::di::Injectable<dptree::di::DependencyMap,
+    |  ________^
+113 | |                                Result<(), Box<dyn std::error::Error +...
+114 | |                                dptree::di::DependencyMap>
+    | |_________________________________________________________^ required by this bound in `cb_prefix`
+    = note: the full name for the type has been written to '/home/moath70188/rust-bot/target/debug/deps/sbere_books_bot-9be03bda3129a523.long-type-5734595328418823278.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+error[E0308]: mismatched types
+   --> src/bot/mod.rs:76:17
+    |
+ 76 |         .branch(cb_prefix("search_page:", handle_search_page))
+    |          ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Handler<'_, DependencyMap, _, ...>`, found `Handler<'_, DependencyMap, ..., ...>`
+    |          |
+    |          arguments to this method are incorrect
+    |
+    = note: expected struct `Handler<'_, _, _, DpHandlerDescription>`
+               found struct `Handler<'static, _, Result<(), Box<(dyn StdError + Send + Sync + 'static)>>, DependencyMap>`
+note: method defined here
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/core.rs:156:12
+    |
+156 |     pub fn branch(self, next: Self) -> Self
+    |            ^^^^^^
+
+error[E0277]: the trait bound `DependencyMap: HandlerDescription` is not satisfied
+   --> src/bot/mod.rs:104:10
+    |
+104 |         .endpoint(handler)
+    |          ^^^^^^^^ the trait `HandlerDescription` is not implemented for `DependencyMap`
+    |
+help: the following other types implement trait `HandlerDescription`
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/description/interest_set.rs:70:1
+    |
+ 70 | / impl<T, S> HandlerDescription for InterestSet<T, S>
+ 71 | | where
+ 72 | |     T: EventKind<S> + Eq + Hash + Clone,
+ 73 | |     S: BuildHasher + Clone,
+ 74 | |     T: Send + Sync + 'static,
+ 75 | |     S: Send + Sync + 'static,
+    | |_____________________________^ `InterestSet<T, S>`
+    |
+   ::: /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/teloxide-0.13.0/src/dispatching/handler_description.rs:28:1
+    |
+ 28 |   impl HandlerDescription for DpHandlerDescription {
+    |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `DpHandlerDescription`
+    |
+   ::: /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/description/unspecified.rs:7:1
+    |
+  7 |   impl HandlerDescription for Unspecified {
+    |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `teloxide::dptree::description::Unspecified`
+note: required by a bound in `teloxide::dptree::handler::methods::<impl Handler<'a, Input, Output, Descr>>::endpoint`
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/methods.rs:10:12
+    |
+ 10 |     Descr: HandlerDescription,
+    |            ^^^^^^^^^^^^^^^^^^ required by this bound in `teloxide::dptree::handler::methods::<impl Handler<'a, Input, Output, Descr>>::endpoint`
+...
+106 |     pub fn endpoint<F, FnArgs>(self, f: F) -> Handler<'a, Input, Output...
+    |            -------- required by a bound in this associated function
+
+error[E0277]: the trait bound `DependencyMap: HandlerDescription` is not satisfied
+   --> src/bot/mod.rs:121:6
+    |
+121 |     .endpoint(handler)
+    |      ^^^^^^^^ the trait `HandlerDescription` is not implemented for `DependencyMap`
+    |
+help: the following other types implement trait `HandlerDescription`
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/description/interest_set.rs:70:1
+    |
+ 70 | / impl<T, S> HandlerDescription for InterestSet<T, S>
+ 71 | | where
+ 72 | |     T: EventKind<S> + Eq + Hash + Clone,
+ 73 | |     S: BuildHasher + Clone,
+ 74 | |     T: Send + Sync + 'static,
+ 75 | |     S: Send + Sync + 'static,
+    | |_____________________________^ `InterestSet<T, S>`
+    |
+   ::: /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/teloxide-0.13.0/src/dispatching/handler_description.rs:28:1
+    |
+ 28 |   impl HandlerDescription for DpHandlerDescription {
+    |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `DpHandlerDescription`
+    |
+   ::: /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/description/unspecified.rs:7:1
+    |
+  7 |   impl HandlerDescription for Unspecified {
+    |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `teloxide::dptree::description::Unspecified`
+note: required by a bound in `teloxide::dptree::handler::methods::<impl Handler<'a, Input, Output, Descr>>::endpoint`
+   --> /home/moath70188/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dptree-0.3.0/src/handler/methods.rs:10:12
+    |
+ 10 |     Descr: HandlerDescription,
+    |            ^^^^^^^^^^^^^^^^^^ required by this bound in `teloxide::dptree::handler::methods::<impl Handler<'a, Input, Output, Descr>>::endpoint`
+...
+106 |     pub fn endpoint<F, FnArgs>(self, f: F) -> Handler<'a, Input, Output...
+    |            -------- required by a bound in this associated function
+
+error[E0599]: no variant, associated function, or constant named `bot_commands` found for enum `bot::Command` in the current scope
+  --> src/main.rs:35:34
+   |
+35 |     bot.set_my_commands(Command::bot_commands()).await?;
+   |                                  ^^^^^^^^^^^^ variant, associated function, or constant not found in `bot::Command`
+   |
+  ::: src/bot/mod.rs:30:1
+   |
+30 | pub enum Command {
+   | ---------------- variant, associated function, or constant `bot_commands` not found for this enum
+   |
+   = help: items from traits can only be used if the trait is in scope
+help: trait `BotCommands` which provides `bot_commands` is implemented but not in scope; perhaps you want to import it
+   |
+ 1 + use teloxide::utils::command::BotCommands;
+   |
+
+Some errors have detailed explanations: E0277, E0308, E0433, E0599.
+For more information about an error, try `rustc --explain E0277`.
+warning: `sbere-books-bot` (bin "sbere-books-bot") generated 4 warnings
+error: could not compile `sbere-books-bot` (bin "sbere-books-bot") due to 30 previous errors; 4 warnings emitted
